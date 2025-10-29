@@ -494,6 +494,38 @@
             width: 100%;
         }
 
+        /* Modal de Login/Registro */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .auth-tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
         /* Contact */
         .contact {
             padding: 5rem 0;
@@ -954,6 +986,60 @@
         </div>
     </div>
 
+    <!-- Modal de Login/Registro -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ingresar / Registrarse</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+                <button class="auth-tab" data-tab="register">Registrarse</button>
+            </div>
+
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-block">Iniciar Sesión</button>
+            </form>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Nombre completo</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Teléfono</label>
+                    <input type="tel" id="registerPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerAddress">Dirección</label>
+                    <textarea id="registerAddress" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-block">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Carrito de compras
         let cart = [];
@@ -970,12 +1056,19 @@
 
         // Modal de pedido
         const orderModal = document.getElementById('orderModal');
-        const closeModal = document.querySelector('.close-modal');
+        const closeModal = document.querySelectorAll('.close-modal');
         const orderForm = document.getElementById('orderForm');
         const orderNumberElement = document.getElementById('orderNumber');
         const orderSubtotalElement = document.getElementById('orderSubtotal');
         const orderShippingElement = document.getElementById('orderShipping');
         const orderTotalElement = document.getElementById('orderTotal');
+
+        // Modal de autenticación
+        const authModal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
 
         // Abrir carrito
         cartIcon.addEventListener('click', () => {
@@ -992,6 +1085,44 @@
         overlay.addEventListener('click', () => {
             cartSidebar.classList.remove('active');
             overlay.classList.remove('active');
+            orderModal.classList.remove('active');
+            authModal.classList.remove('active');
+        });
+
+        // Abrir modal de autenticación
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            authModal.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // Cambiar entre pestañas de login/registro
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+
+                // Activar pestaña seleccionada
+                authTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Mostrar formulario correspondiente
+                if (tabName === 'login') {
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                } else {
+                    loginForm.classList.remove('active');
+                    registerForm.classList.add('active');
+                }
+            });
+        });
+
+        // Cerrar modales
+        closeModal.forEach(button => {
+            button.addEventListener('click', () => {
+                orderModal.classList.remove('active');
+                authModal.classList.remove('active');
+                overlay.classList.remove('active');
+            });
         });
 
         // Controles de cantidad en productos
@@ -1131,12 +1262,6 @@
             overlay.classList.add('active');
         });
 
-        // Cerrar modal
-        closeModal.addEventListener('click', () => {
-            orderModal.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-
         // Enviar formulario de pedido
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1150,6 +1275,52 @@
             orderModal.classList.remove('active');
             overlay.classList.remove('active');
             cartSidebar.classList.remove('active');
+
+            // Resetear formulario
+            this.reset();
+        });
+
+        // Enviar formulario de login
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Aquí normalmente validarías las credenciales con un servidor
+            const email = document.getElementById('loginEmail').value;
+            alert('¡Bienvenido de nuevo! Has iniciado sesión como: ' + email);
+
+            // Cerrar modal
+            authModal.classList.remove('active');
+            overlay.classList.remove('active');
+
+            // Cambiar texto del botón de login
+            loginBtn.textContent = 'Mi Cuenta';
+
+            // Resetear formulario
+            this.reset();
+        });
+
+        // Enviar formulario de registro
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            // Aquí normalmente enviarías los datos de registro a un servidor
+            const name = document.getElementById('registerName').value;
+            alert('¡Cuenta creada exitosamente! Bienvenido/a ' + name);
+
+            // Cerrar modal
+            authModal.classList.remove('active');
+            overlay.classList.remove('active');
+
+            // Cambiar texto del botón de login
+            loginBtn.textContent = 'Mi Cuenta';
 
             // Resetear formulario
             this.reset();
