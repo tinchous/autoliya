@@ -526,6 +526,104 @@
             display: block;
         }
 
+        /* Dashboard del Cliente */
+        .dashboard-section {
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dashboard-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .dashboard-tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .order-item {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        /* WhatsApp Order Preview */
+        .whatsapp-preview {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .product-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .product-checkbox input {
+            margin-right: 0.5rem;
+        }
+
+        .product-checked {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
         /* Contact */
         .contact {
             padding: 5rem 0;
@@ -564,6 +662,19 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
+        }
+
+        .map-container {
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
         }
 
         /* Footer */
@@ -688,7 +799,7 @@
                         <span class="cart-count">0</span>
                     </div>
                 </li>
-                <li><a href="#" id="loginBtn">Ingresar</a></li>
+                <li><a href="#" id="accountBtn">Ingresar</a></li>
             </ul>
         </div>
     </header>
@@ -854,20 +965,24 @@
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Av. Principal 123, Ciudad</span>
+                            <span>Alejandro Fiol de Pereda 1251, 11800, Reducto, Montevideo</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+1 234 567 890</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>info@autoservice.com</span>
+                            <span>+598 92 308 828</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <span>Lun-Dom: 7:00 - 22:00</span>
+                            <span>24/7 - Martes desde 08:00</span>
                         </div>
+                        <div class="contact-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Delivery: 08:00 - 23:30</span>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3275.347782290287!2d-56.17045622444137!3d-34.83444526665741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f81b8b3f2c0e3%3A0x9e1e5f6c9c5b5e1f!2sAlejandro%20Fiol%20de%20Pereda%201251%2C%2011800%20Montevideo%2C%20Departamento%20de%20Montevideo!5e0!3m2!1ses!2suy!4v1641234567890!5m2!1ses!2suy" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
 
@@ -900,7 +1015,7 @@
                     <h3>AutoService</h3>
                     <p>Tu kiosco y rotisería de confianza. Productos frescos y atención personalizada.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/59892308828" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                     </div>
@@ -917,9 +1032,9 @@
                 <div class="footer-column">
                     <h3>Horarios</h3>
                     <ul class="footer-links">
-                        <li>Lunes a Viernes: 7:00 - 22:00</li>
-                        <li>Sábados: 8:00 - 22:00</li>
-                        <li>Domingos: 9:00 - 21:00</li>
+                        <li>Local: 24/7</li>
+                        <li>Martes: Desde 08:00</li>
+                        <li>Delivery: 08:00 - 23:30</li>
                     </ul>
                 </div>
             </div>
@@ -981,7 +1096,7 @@
                     <p>Envío: $<span id="orderShipping">0</span></p>
                     <p><strong>Total: $<span id="orderTotal">0</span></strong></p>
                 </div>
-                <button type="submit" class="btn btn-block">Confirmar Pedido</button>
+                <button type="submit" class="btn btn-block">Enviar Pedido por WhatsApp</button>
             </form>
         </div>
     </div>
@@ -1040,9 +1155,83 @@
         </div>
     </div>
 
+    <!-- Modal de Dashboard del Cliente -->
+    <div class="modal" id="dashboardModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Mi Cuenta</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+
+            <div class="dashboard-tabs">
+                <button class="dashboard-tab active" data-tab="profile">Mi Perfil</button>
+                <button class="dashboard-tab" data-tab="orders">Mis Pedidos</button>
+            </div>
+
+            <div id="profileSection" class="dashboard-section active">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <p id="profileName"></p>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <p id="profileEmail"></p>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <p id="profilePhone"></p>
+                </div>
+                <div class="form-group">
+                    <label>Dirección</label>
+                    <p id="profileAddress"></p>
+                </div>
+                <button id="logoutBtn" class="btn btn-block">Cerrar Sesión</button>
+            </div>
+
+            <div id="ordersSection" class="dashboard-section">
+                <h4>Historial de Pedidos</h4>
+                <div id="ordersList">
+                    <!-- Los pedidos se insertarán aquí dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Vista Previa de WhatsApp -->
+    <div class="modal" id="whatsappPreviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Vista Previa del Pedido</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+
+            <div class="whatsapp-preview" id="whatsappMessage">
+                <!-- El mensaje de WhatsApp se generará aquí -->
+            </div>
+
+            <div id="orderChecklist">
+                <h4>Lista de Productos para Preparar</h4>
+                <!-- Los productos con checkboxes se insertarán aquí -->
+            </div>
+
+            <div class="form-group">
+                <p><strong>Número de Orden: <span id="previewOrderNumber"></span></strong></p>
+                <p>Subtotal: $<span id="previewSubtotal">0</span></p>
+                <p>Envío: $<span id="previewShipping">0</span></p>
+                <p><strong>Total: $<span id="previewTotal">0</span></strong></p>
+            </div>
+
+            <button id="sendWhatsAppBtn" class="btn btn-block">Enviar por WhatsApp</button>
+        </div>
+    </div>
+
     <script>
-        // Carrito de compras
+        // Estado de la aplicación
         let cart = [];
+        let currentUser = null;
+        let orders = [];
+
+        // Elementos del DOM
         const cartIcon = document.querySelector('.cart-icon');
         const cartSidebar = document.querySelector('.cart-sidebar');
         const overlay = document.querySelector('.overlay');
@@ -1054,21 +1243,51 @@
         const totalElement = document.getElementById('total');
         const checkoutBtn = document.querySelector('.checkout-btn');
 
-        // Modal de pedido
+        // Modales
         const orderModal = document.getElementById('orderModal');
-        const closeModal = document.querySelectorAll('.close-modal');
-        const orderForm = document.getElementById('orderForm');
-        const orderNumberElement = document.getElementById('orderNumber');
-        const orderSubtotalElement = document.getElementById('orderSubtotal');
-        const orderShippingElement = document.getElementById('orderShipping');
-        const orderTotalElement = document.getElementById('orderTotal');
-
-        // Modal de autenticación
         const authModal = document.getElementById('authModal');
-        const loginBtn = document.getElementById('loginBtn');
-        const authTabs = document.querySelectorAll('.auth-tab');
+        const dashboardModal = document.getElementById('dashboardModal');
+        const whatsappPreviewModal = document.getElementById('whatsappPreviewModal');
+        const closeModal = document.querySelectorAll('.close-modal');
+        const accountBtn = document.getElementById('accountBtn');
+
+        // Formularios
+        const orderForm = document.getElementById('orderForm');
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
+
+        // Elementos del dashboard
+        const profileName = document.getElementById('profileName');
+        const profileEmail = document.getElementById('profileEmail');
+        const profilePhone = document.getElementById('profilePhone');
+        const profileAddress = document.getElementById('profileAddress');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const ordersList = document.getElementById('ordersList');
+
+        // Elementos de vista previa de WhatsApp
+        const whatsappMessage = document.getElementById('whatsappMessage');
+        const orderChecklist = document.getElementById('orderChecklist');
+        const previewOrderNumber = document.getElementById('previewOrderNumber');
+        const previewSubtotal = document.getElementById('previewSubtotal');
+        const previewShipping = document.getElementById('previewShipping');
+        const previewTotal = document.getElementById('previewTotal');
+        const sendWhatsAppBtn = document.getElementById('sendWhatsAppBtn');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si hay un usuario logueado
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                accountBtn.textContent = 'Mi Cuenta';
+            }
+
+            // Verificar si hay órdenes guardadas
+            const savedOrders = localStorage.getItem('orders');
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+            }
+        });
 
         // Abrir carrito
         cartIcon.addEventListener('click', () => {
@@ -1087,22 +1306,31 @@
             overlay.classList.remove('active');
             orderModal.classList.remove('active');
             authModal.classList.remove('active');
+            dashboardModal.classList.remove('active');
+            whatsappPreviewModal.classList.remove('active');
         });
 
-        // Abrir modal de autenticación
-        loginBtn.addEventListener('click', (e) => {
+        // Manejo del botón de cuenta
+        accountBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            authModal.classList.add('active');
-            overlay.classList.add('active');
+
+            if (currentUser) {
+                // Si hay usuario logueado, mostrar dashboard
+                showDashboard();
+            } else {
+                // Si no hay usuario, mostrar modal de autenticación
+                authModal.classList.add('active');
+                overlay.classList.add('active');
+            }
         });
 
         // Cambiar entre pestañas de login/registro
-        authTabs.forEach(tab => {
+        document.querySelectorAll('.auth-tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabName = this.getAttribute('data-tab');
 
                 // Activar pestaña seleccionada
-                authTabs.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
 
                 // Mostrar formulario correspondiente
@@ -1116,11 +1344,30 @@
             });
         });
 
+        // Cambiar entre pestañas del dashboard
+        document.querySelectorAll('.dashboard-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+
+                // Activar pestaña seleccionada
+                document.querySelectorAll('.dashboard-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Mostrar sección correspondiente
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(tabName + 'Section').classList.add('active');
+            });
+        });
+
         // Cerrar modales
         closeModal.forEach(button => {
             button.addEventListener('click', () => {
                 orderModal.classList.remove('active');
                 authModal.classList.remove('active');
+                dashboardModal.classList.remove('active');
+                whatsappPreviewModal.classList.remove('active');
                 overlay.classList.remove('active');
             });
         });
@@ -1246,16 +1493,24 @@
 
             // Generar número de orden aleatorio
             const orderNumber = 'ORD' + Math.floor(100000 + Math.random() * 900000);
-            orderNumberElement.textContent = orderNumber;
+            document.getElementById('orderNumber').textContent = orderNumber;
 
             // Actualizar totales en el modal
             const subtotal = parseFloat(subtotalElement.textContent);
             const shipping = parseFloat(shippingElement.textContent);
             const total = parseFloat(totalElement.textContent);
 
-            orderSubtotalElement.textContent = subtotal.toFixed(2);
-            orderShippingElement.textContent = shipping.toFixed(2);
-            orderTotalElement.textContent = total.toFixed(2);
+            document.getElementById('orderSubtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('orderShipping').textContent = shipping.toFixed(2);
+            document.getElementById('orderTotal').textContent = total.toFixed(2);
+
+            // Si hay usuario logueado, prellenar datos
+            if (currentUser) {
+                document.getElementById('orderName').value = currentUser.name;
+                document.getElementById('orderPhone').value = currentUser.phone;
+                document.getElementById('orderAddress').value = currentUser.address;
+                document.getElementById('orderEmail').value = currentUser.email;
+            }
 
             // Mostrar modal
             orderModal.classList.add('active');
@@ -1266,34 +1521,55 @@
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Aquí normalmente enviarías los datos a un servidor
-            alert('¡Pedido confirmado! Tu número de orden es: ' + orderNumberElement.textContent);
+            const orderData = {
+                number: document.getElementById('orderNumber').textContent,
+                name: document.getElementById('orderName').value,
+                phone: document.getElementById('orderPhone').value,
+                address: document.getElementById('orderAddress').value,
+                email: document.getElementById('orderEmail').value,
+                items: [...cart],
+                subtotal: parseFloat(document.getElementById('orderSubtotal').textContent),
+                shipping: parseFloat(document.getElementById('orderShipping').textContent),
+                total: parseFloat(document.getElementById('orderTotal').textContent),
+                date: new Date().toISOString(),
+                status: 'pending'
+            };
 
-            // Limpiar carrito y cerrar modales
-            cart = [];
-            updateCart();
+            // Guardar orden
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Mostrar vista previa de WhatsApp
+            showWhatsAppPreview(orderData);
+
+            // Cerrar modal de pedido
             orderModal.classList.remove('active');
-            overlay.classList.remove('active');
-            cartSidebar.classList.remove('active');
-
-            // Resetear formulario
-            this.reset();
         });
 
         // Enviar formulario de login
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Aquí normalmente validarías las credenciales con un servidor
             const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Aquí normalmente validarías las credenciales con un servidor
+            // Por ahora, simulamos un login exitoso
+            currentUser = {
+                name: 'Usuario Demo',
+                email: email,
+                phone: '+598 92 308 828',
+                address: 'Alejandro Fiol de Pereda 1251, 11800, Reducto, Montevideo'
+            };
+
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
             alert('¡Bienvenido de nuevo! Has iniciado sesión como: ' + email);
 
-            // Cerrar modal
+            // Cerrar modal y actualizar interfaz
             authModal.classList.remove('active');
             overlay.classList.remove('active');
-
-            // Cambiar texto del botón de login
-            loginBtn.textContent = 'Mi Cuenta';
+            accountBtn.textContent = 'Mi Cuenta';
 
             // Resetear formulario
             this.reset();
@@ -1311,20 +1587,150 @@
                 return;
             }
 
-            // Aquí normalmente enviarías los datos de registro a un servidor
-            const name = document.getElementById('registerName').value;
-            alert('¡Cuenta creada exitosamente! Bienvenido/a ' + name);
+            // Crear usuario
+            currentUser = {
+                name: document.getElementById('registerName').value,
+                email: document.getElementById('registerEmail').value,
+                phone: document.getElementById('registerPhone').value,
+                address: document.getElementById('registerAddress').value
+            };
 
-            // Cerrar modal
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+            alert('¡Cuenta creada exitosamente! Bienvenido/a ' + currentUser.name);
+
+            // Cerrar modal y actualizar interfaz
             authModal.classList.remove('active');
             overlay.classList.remove('active');
-
-            // Cambiar texto del botón de login
-            loginBtn.textContent = 'Mi Cuenta';
+            accountBtn.textContent = 'Mi Cuenta';
 
             // Resetear formulario
             this.reset();
         });
+
+        // Cerrar sesión
+        logoutBtn.addEventListener('click', function() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            accountBtn.textContent = 'Ingresar';
+            dashboardModal.classList.remove('active');
+            overlay.classList.remove('active');
+            alert('Has cerrado sesión correctamente');
+        });
+
+        // Mostrar dashboard del cliente
+        function showDashboard() {
+            if (currentUser) {
+                profileName.textContent = currentUser.name;
+                profileEmail.textContent = currentUser.email;
+                profilePhone.textContent = currentUser.phone;
+                profileAddress.textContent = currentUser.address;
+
+                // Mostrar órdenes
+                ordersList.innerHTML = '';
+                if (orders.length === 0) {
+                    ordersList.innerHTML = '<p>No tienes pedidos realizados.</p>';
+                } else {
+                    orders.forEach(order => {
+                        const orderItem = document.createElement('div');
+                        orderItem.className = 'order-item';
+                        orderItem.innerHTML = `
+                            <div class="order-header">
+                                <strong>${order.number}</strong>
+                                <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
+                            </div>
+                            <p>Fecha: ${new Date(order.date).toLocaleDateString()}</p>
+                            <p>Total: $${order.total.toFixed(2)}</p>
+                            <p>${order.items.length} productos</p>
+                        `;
+                        ordersList.appendChild(orderItem);
+                    });
+                }
+
+                dashboardModal.classList.add('active');
+                overlay.classList.add('active');
+            }
+        }
+
+        // Mostrar vista previa de WhatsApp
+        function showWhatsAppPreview(orderData) {
+            previewOrderNumber.textContent = orderData.number;
+            previewSubtotal.textContent = orderData.subtotal.toFixed(2);
+            previewShipping.textContent = orderData.shipping.toFixed(2);
+            previewTotal.textContent = orderData.total.toFixed(2);
+
+            // Generar mensaje de WhatsApp
+            let message = `¡Hola! Quiero hacer un pedido:\n\n`;
+            message += `*Número de Orden:* ${orderData.number}\n`;
+            message += `*Cliente:* ${orderData.name}\n`;
+            message += `*Teléfono:* ${orderData.phone}\n`;
+            message += `*Dirección:* ${orderData.address}\n\n`;
+            message += `*Pedido:*\n`;
+
+            orderData.items.forEach(item => {
+                message += `🔸 ${item.quantity}x ${item.name} - $${item.price}\n`;
+            });
+
+            message += `\n*Subtotal:* $${orderData.subtotal.toFixed(2)}\n`;
+            message += `*EnvÃo:* $${orderData.shipping.toFixed(2)}\n`;
+            message += `*Total:* $${orderData.total.toFixed(2)}\n\n`;
+            message += `¡Gracias!`;
+
+            whatsappMessage.textContent = message;
+
+            // Generar lista de productos con checkboxes
+            orderChecklist.innerHTML = '<h4>Lista de Productos para Preparar</h4>';
+            orderData.items.forEach(item => {
+                const productCheckbox = document.createElement('div');
+                productCheckbox.className = 'product-checkbox';
+                productCheckbox.innerHTML = `
+                    <input type="checkbox" id="product-${item.name}" data-product="${item.name}">
+                    <label for="product-${item.name}">${item.quantity}x ${item.name}</label>
+                `;
+                orderChecklist.appendChild(productCheckbox);
+
+                // Agregar evento para tachar productos
+                const checkbox = productCheckbox.querySelector('input');
+                checkbox.addEventListener('change', function() {
+                    const label = productCheckbox.querySelector('label');
+                    if (this.checked) {
+                        label.classList.add('product-checked');
+                    } else {
+                        label.classList.remove('product-checked');
+                    }
+                });
+            });
+
+            // Configurar botón de enviar por WhatsApp
+            sendWhatsAppBtn.onclick = function() {
+                const phone = '59892308828';
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
+
+                // Limpiar carrito y cerrar modales
+                cart = [];
+                updateCart();
+                whatsappPreviewModal.classList.remove('active');
+                overlay.classList.remove('active');
+                cartSidebar.classList.remove('active');
+
+                alert('¡Pedido enviado por WhatsApp! Te contactaremos pronto.');
+            };
+
+            whatsappPreviewModal.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // Función auxiliar para obtener texto del estado
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'Pendiente',
+                'confirmed': 'Confirmado',
+                'delivered': 'Entregado'
+            };
+            return statusMap[status] || status;
+        }
 
         // Filtrado de productos
         const tabs = document.querySelectorAll('.tab');
