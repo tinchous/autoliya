@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoService - Kiosco, Rotisería y Comestibles</title>
+    <title>AutoService - Kiosco, Rotisería y Almacén</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #e74c3c;
             --secondary: #2c3e50;
             --accent: #f39c12;
-            --light: #f9f9f9;
-            --dark: #333;
-            --success: #27ae60;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
         }
@@ -25,7 +25,7 @@
         }
 
         body {
-            background-color: var(--light);
+            background-color: #fff;
             color: var(--dark);
             line-height: 1.6;
         }
@@ -38,9 +38,10 @@
 
         /* Header */
         header {
-            background-color: white;
+            background: white;
             box-shadow: var(--shadow);
-            position: sticky;
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
         }
@@ -53,56 +54,30 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            color: var(--primary);
-            font-size: 2rem;
-        }
-
-        .logo-text {
             font-size: 1.8rem;
             font-weight: bold;
+            color: var(--secondary);
         }
 
-        .logo-text span {
+        .logo span {
             color: var(--primary);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--secondary);
+            color: var(--dark);
             font-weight: 500;
             transition: var(--transition);
-            position: relative;
         }
 
         .nav-links a:hover {
             color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
         }
 
         .mobile-menu {
@@ -117,8 +92,9 @@
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 6rem 0;
+            padding: 8rem 0 4rem;
             text-align: center;
+            margin-top: 60px;
         }
 
         .hero h1 {
@@ -128,17 +104,17 @@
 
         .hero p {
             font-size: 1.2rem;
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto 2rem;
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 12px 30px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: var(--transition);
@@ -146,15 +122,14 @@
         }
 
         .btn:hover {
-            background-color: #c0392b;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            background: #c0392b;
+            transform: translateY(-2px);
         }
 
-        /* Servicios */
+        /* Services */
         .services {
             padding: 5rem 0;
-            background-color: white;
+            background: var(--light);
         }
 
         .section-title {
@@ -165,34 +140,26 @@
         .section-title h2 {
             font-size: 2.5rem;
             color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title p {
-            color: #777;
-            max-width: 600px;
-            margin: 0 auto;
+            margin-bottom: 1rem;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
         .service-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            text-align: center;
-            padding: 2rem 1.5rem;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
         }
 
         .service-icon {
@@ -206,49 +173,44 @@
             margin-bottom: 1rem;
         }
 
-        .service-card p {
-            color: #666;
-        }
-
-        /* Productos */
+        /* Products */
         .products {
             padding: 5rem 0;
-            background-color: var(--light);
         }
 
         .category-tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
             gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
         .tab {
-            padding: 0.8rem 1.5rem;
-            background-color: white;
-            border: none;
-            border-radius: 30px;
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: 500;
             transition: var(--transition);
-            box-shadow: var(--shadow);
+            font-weight: 500;
         }
 
         .tab.active {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .product-card {
-            background-color: white;
-            border-radius: 8px;
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -256,11 +218,10 @@
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
         .product-img {
-            height: 180px;
+            height: 200px;
             background-size: cover;
             background-position: center;
         }
@@ -275,124 +236,32 @@
         }
 
         .product-price {
-            font-weight: bold;
             color: var(--primary);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-description {
-            color: #666;
-            font-size: 0.9rem;
+            font-size: 1.3rem;
+            font-weight: bold;
             margin-bottom: 1rem;
         }
 
         .add-to-cart {
             width: 100%;
-            padding: 0.6rem;
-            background-color: var(--accent);
+            padding: 10px;
+            background: var(--accent);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             transition: var(--transition);
         }
 
         .add-to-cart:hover {
-            background-color: #e67e22;
+            background: #e67e22;
         }
 
-        /* Sobre Nosotros */
-        .about {
-            padding: 5rem 0;
-            background-color: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .about-text h2 {
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            font-size: 2.2rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: #555;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .feature i {
-            color: var(--success);
-            font-size: 1.2rem;
-        }
-
-        /* Horarios */
-        .hours {
-            padding: 5rem 0;
-            background-color: var(--light);
-            text-align: center;
-        }
-
-        .hours-content {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .hours-list {
-            list-style: none;
-            margin-top: 1.5rem;
-        }
-
-        .hours-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .hours-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Contacto */
+        /* Contact */
         .contact {
             padding: 5rem 0;
-            background-color: white;
+            background: var(--light);
         }
 
         .contact-container {
@@ -402,14 +271,8 @@
         }
 
         .contact-info h2 {
-            margin-bottom: 1.5rem;
-            font-size: 2.2rem;
             color: var(--secondary);
-        }
-
-        .contact-info p {
-            margin-bottom: 2rem;
-            color: #555;
+            margin-bottom: 1.5rem;
         }
 
         .contact-details {
@@ -423,16 +286,15 @@
         }
 
         .contact-item i {
-            margin-right: 1rem;
             color: var(--primary);
-            font-size: 1.2rem;
+            margin-right: 1rem;
             width: 20px;
         }
 
         .contact-form {
-            background-color: var(--light);
+            background: white;
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: var(--shadow);
         }
 
@@ -449,39 +311,31 @@
 
         .form-control {
             width: 100%;
-            padding: 0.8rem;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.2);
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
         }
 
         .btn-block {
-            display: block;
             width: 100%;
         }
 
         /* Footer */
         footer {
-            background-color: var(--secondary);
+            background: var(--secondary);
             color: white;
-            padding: 3rem 0 1.5rem;
+            padding: 3rem 0 1rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
@@ -489,7 +343,6 @@
         .footer-column h3 {
             color: var(--primary);
             margin-bottom: 1.5rem;
-            font-size: 1.2rem;
         }
 
         .footer-links {
@@ -501,19 +354,19 @@
         }
 
         .footer-links a {
-            color: #bbb;
+            color: #ccc;
             text-decoration: none;
             transition: var(--transition);
         }
 
         .footer-links a:hover {
             color: white;
-            padding-left: 5px;
         }
 
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
@@ -522,7 +375,7 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             color: white;
             text-decoration: none;
@@ -530,78 +383,20 @@
         }
 
         .social-links a:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
+            background: var(--primary);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 1.5rem;
+            padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.1);
-            color: #bbb;
-            font-size: 0.9rem;
-        }
-
-        /* Animaciones */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            color: #ccc;
         }
 
         /* Responsive */
-        @media (max-width: 992px) {
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-img {
-                order: -1;
-            }
-        }
-
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 1rem 0;
-                box-shadow: var(--shadow);
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                margin: 0;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 0.8rem 1rem;
             }
 
             .mobile-menu {
@@ -612,30 +407,8 @@
                 font-size: 2.2rem;
             }
 
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .features {
+            .contact-container {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero {
-                padding: 4rem 0;
-            }
-
-            .services,
-            .products,
-            .about,
-            .hours,
-            .contact {
-                padding: 3rem 0;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
             }
 
             .category-tabs {
@@ -645,7 +418,8 @@
 
             .tab {
                 width: 100%;
-                max-width: 250px;
+                max-width: 300px;
+                text-align: center;
             }
         }
     </style>
@@ -654,10 +428,7 @@
     <!-- Header -->
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-store logo-icon"></i>
-                <div class="logo-text">Auto<span>Service</span></div>
-            </div>
+            <div class="logo">Auto<span>Service</span></div>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
             </div>
@@ -665,8 +436,6 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#productos">Productos</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#horarios">Horarios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </div>
@@ -675,247 +444,147 @@
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="container">
-            <h1>Tu Kiosco y Rotisería de Confianza</h1>
-            <p>En AutoService encontrarás todo lo que necesitas: desde comestibles y bebidas hasta comidas preparadas y productos frescos.</p>
+            <h1>AutoService - Tu Kiosco de Confianza</h1>
+            <p>Todo lo que necesitas en un solo lugar: comestibles, rotisería, bebidas y mucho más</p>
             <a href="#productos" class="btn">Ver Productos</a>
         </div>
     </section>
 
-    <!-- Servicios -->
+    <!-- Services -->
     <section class="services" id="servicios">
         <div class="container">
             <div class="section-title">
                 <h2>Nuestros Servicios</h2>
-                <p>Ofrecemos una amplia variedad de productos y servicios para satisfacer todas tus necesidades</p>
+                <p>Ofrecemos una amplia variedad de productos y servicios</p>
             </div>
             <div class="services-grid">
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <i class="fas fa-utensils service-icon"></i>
                     <h3>Rotisería</h3>
-                    <p>Comidas preparadas y platos del día listos para llevar. Siempre frescos y deliciosos.</p>
+                    <p>Comidas preparadas y platos del día listos para llevar</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <i class="fas fa-apple-alt service-icon"></i>
                     <h3>Frutas y Verduras</h3>
-                    <p>Productos frescos seleccionados diariamente para garantizar la mejor calidad.</p>
+                    <p>Productos frescos seleccionados diariamente</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <i class="fas fa-wine-bottle service-icon"></i>
                     <h3>Kiosco</h3>
-                    <p>Amplia variedad de bebidas, snacks, golosinas y productos de almacén.</p>
+                    <p>Bebidas, snacks y productos de almacén</p>
                 </div>
-                <div class="service-card fade-in">
+                <div class="service-card">
                     <i class="fas fa-bread-slice service-icon"></i>
                     <h3>Panadería</h3>
-                    <p>Pan fresco, facturas y productos de panadería recién horneados cada día.</p>
+                    <p>Pan fresco y productos de panadería</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Productos -->
+    <!-- Products -->
     <section class="products" id="productos">
         <div class="container">
             <div class="section-title">
                 <h2>Nuestros Productos</h2>
-                <p>Descubre nuestra amplia selección de productos frescos y de calidad</p>
+                <p>Descubre nuestra selección de productos frescos</p>
             </div>
 
             <div class="category-tabs">
                 <button class="tab active" data-category="all">Todos</button>
                 <button class="tab" data-category="rotiseria">Rotisería</button>
-                <button class="tab" data-category="frutas-verduras">Frutas y Verduras</button>
-                <button class="tab" data-category="kiosco">Kiosco</button>
-                <button class="tab" data-category="panaderia">Panadería</button>
+                <button class="tab" data-category="bebidas">Bebidas</button>
+                <button class="tab" data-category="almacen">Almacén</button>
             </div>
 
             <div class="products-grid">
                 <!-- Productos de Rotisería -->
-                <div class="product-card fade-in" data-category="rotiseria">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1598214886806-c87b84b7078b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="product-card" data-category="rotiseria">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1598214886806-c87b84b7078b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                     <div class="product-content">
                         <h3>Pollo al Spiedo</h3>
                         <div class="product-price">$1,200</div>
-                        <p class="product-description">Pollo entero asado al spiedo, jugoso y con hierbas aromáticas.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
 
-                <div class="product-card fade-in" data-category="rotiseria">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="product-card" data-category="rotiseria">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                     <div class="product-content">
                         <h3>Empanadas</h3>
                         <div class="product-price">$180 c/u</div>
-                        <p class="product-description">Empanadas caseras de carne, pollo o jamón y queso.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
 
-                <!-- Productos de Frutas y Verduras -->
-                <div class="product-card fade-in" data-category="frutas-verduras">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <!-- Productos de Bebidas -->
+                <div class="product-card" data-category="bebidas">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                     <div class="product-content">
-                        <h3>Manzanas</h3>
-                        <div class="product-price">$450/kg</div>
-                        <p class="product-description">Manzanas rojas y verdes, frescas y crujientes.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
-                    </div>
-                </div>
-
-                <div class="product-card fade-in" data-category="frutas-verduras">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="product-content">
-                        <h3>Tomates</h3>
-                        <div class="product-price">$380/kg</div>
-                        <p class="product-description">Tomates perita y redondos, perfectos para ensaladas.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
-                    </div>
-                </div>
-
-                <!-- Productos de Kiosco -->
-                <div class="product-card fade-in" data-category="kiosco">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                    <div class="product-content">
-                        <h3>Gaseosas</h3>
+                        <h3>Gaseosas 2.25L</h3>
                         <div class="product-price">$350</div>
-                        <p class="product-description">Variedad de gaseosas en botella de 1.5L y 2.25L.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
 
-                <div class="product-card fade-in" data-category="kiosco">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1623241896326-a7e685896c3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="product-card" data-category="bebidas">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                     <div class="product-content">
-                        <h3>Snacks</h3>
+                        <h3>Agua Mineral</h3>
                         <div class="product-price">$280</div>
-                        <p class="product-description">Papas fritas, chizitos, palitos y otros snacks.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
 
-                <!-- Productos de Panadería -->
-                <div class="product-card fade-in" data-category="panaderia">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <!-- Productos de Almacén -->
+                <div class="product-card" data-category="almacen">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1623241896326-a7e685896c3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                     <div class="product-content">
-                        <h3>Pan Casero</h3>
-                        <div class="product-price">$220</div>
-                        <p class="product-description">Pan fresco recién horneado, ideal para el desayuno.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <h3>Snacks Variados</h3>
+                        <div class="product-price">$280</div>
+                        <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
 
-                <div class="product-card fade-in" data-category="panaderia">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1558961369-3b8c458d4e8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="product-card" data-category="almacen">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
                     <div class="product-content">
-                        <h3>Facturas</h3>
-                        <div class="product-price">$120 c/u</div>
-                        <p class="product-description">Medialunas, vigilantes y otras facturas dulces.</p>
-                        <button class="add-to-cart">Agregar al Carrito</button>
+                        <h3>Galletitas</h3>
+                        <div class="product-price">$320</div>
+                        <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sobre Nosotros -->
-    <section class="about" id="nosotros">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Más de 10 años sirviendo a la comunidad</h2>
-                    <p>En AutoService nos enorgullece ser tu kiosco, rotisería y almacén de confianza desde hace más de una década. Nuestro compromiso es ofrecer productos de calidad a precios justos.</p>
-                    <p>Seleccionamos cuidadosamente cada producto para garantizar frescura y sabor, desde nuestras frutas y verduras hasta las comidas preparadas de nuestra rotisería.</p>
-
-                    <div class="features">
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Productos frescos diariamente</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Atención personalizada</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Precios competitivos</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Amplio horario de atención</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1621341838374-cc4b1b034d57?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nuestro local">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Horarios -->
-    <section class="hours" id="horarios">
-        <div class="container">
-            <div class="section-title">
-                <h2>Horarios de Atención</h2>
-                <p>Estamos aquí para servirte cuando nos necesites</p>
-            </div>
-
-            <div class="hours-content">
-                <ul class="hours-list">
-                    <li>
-                        <span>Lunes a Viernes</span>
-                        <span>7:00 - 21:00 hs</span>
-                    </li>
-                    <li>
-                        <span>Sábados</span>
-                        <span>8:00 - 21:00 hs</span>
-                    </li>
-                    <li>
-                        <span>Domingos y Feriados</span>
-                        <span>9:00 - 13:00 hs</span>
-                    </li>
-                </ul>
-                <p style="margin-top: 1.5rem; color: var(--primary); font-weight: bold;">¡Atención telefónica y delivery disponible!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contacto -->
+    <!-- Contact -->
     <section class="contact" id="contacto">
         <div class="container">
+            <div class="section-title">
+                <h2>Contacto</h2>
+                <p>Estamos aquí para atenderte</p>
+            </div>
+
             <div class="contact-container">
                 <div class="contact-info">
-                    <h2>Contáctanos</h2>
-                    <p>Visítanos o llámanos para realizar tu pedido. Estamos aquí para ayudarte.</p>
-
+                    <h2>Visítanos</h2>
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Dirección</h4>
-                                <p>Av. Principal 123, Ciudad</p>
-                            </div>
+                            <span>Av. Principal 123, Ciudad</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Teléfono</h4>
-                                <p>+1 234 567 890</p>
-                            </div>
+                            <span>+1 234 567 890</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@autoservice.com</p>
-                            </div>
+                            <span>info@autoservice.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Horario</h4>
-                                <p>Lun - Vie: 7:00 - 21:00<br>Sáb: 8:00 - 21:00<br>Dom: 9:00 - 13:00</p>
-                            </div>
+                            <span>Lun-Dom: 7:00 - 22:00</span>
                         </div>
                     </div>
                 </div>
@@ -927,16 +596,12 @@
                             <input type="text" id="name" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
                             <label for="phone">Teléfono</label>
                             <input type="tel" id="phone" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Mensaje</label>
-                            <textarea id="message" class="form-control" placeholder="¿Qué necesitas? ¿Quieres hacer un pedido especial?" required></textarea>
+                            <textarea id="message" class="form-control" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-block">Enviar Mensaje</button>
                     </form>
@@ -951,11 +616,11 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>AutoService</h3>
-                    <p>Tu kiosco, rotisería y almacén de confianza. Productos frescos y comidas preparadas con la mejor calidad.</p>
+                    <p>Tu kiosco y rotisería de confianza. Productos frescos y atención personalizada.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -964,31 +629,20 @@
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#servicios">Servicios</a></li>
                         <li><a href="#productos">Productos</a></li>
-                        <li><a href="#nosotros">Nosotros</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Servicios</h3>
+                    <h3>Horarios</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Rotisería</a></li>
-                        <li><a href="#">Frutas y Verduras</a></li>
-                        <li><a href="#">Kiosco</a></li>
-                        <li><a href="#">Panadería</a></li>
-                        <li><a href="#">Delivery</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad</li>
-                        <li><i class="fas fa-phone"></i> +1 234 567 890</li>
-                        <li><i class="fas fa-envelope"></i> info@autoservice.com</li>
+                        <li>Lunes a Viernes: 7:00 - 22:00</li>
+                        <li>Sábados: 8:00 - 22:00</li>
+                        <li>Domingos: 9:00 - 21:00</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 AutoService. Todos los derechos reservados.</p>
+                <p>&copy; 2024 AutoService. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -999,43 +653,25 @@
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
-        // Filtrado de productos por categoría
+        // Filtrado de productos
         const tabs = document.querySelectorAll('.tab');
-        const productCards = document.querySelectorAll('.product-card');
+        const products = document.querySelectorAll('.product-card');
 
         tabs.forEach(tab => {
             tab.addEventListener('click', function() {
-                // Remover clase active de todas las pestañas
                 tabs.forEach(t => t.classList.remove('active'));
-                // Agregar clase active a la pestaña clickeada
                 this.classList.add('active');
 
                 const category = this.getAttribute('data-category');
 
-                // Mostrar/ocultar productos según la categoría
-                productCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'block';
+                products.forEach(product => {
+                    if (category === 'all' || product.getAttribute('data-category') === category) {
+                        product.style.display = 'block';
                     } else {
-                        card.style.display = 'none';
+                        product.style.display = 'none';
                     }
                 });
             });
-        });
-
-        // Animación de elementos al hacer scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('visible');
-                appearOnScroll.unobserve(entry.target);
-            });
-        }, { threshold: 0.1 });
-
-        fadeElements.forEach(element => {
-            appearOnScroll.observe(element);
         });
 
         // Formulario de contacto
@@ -1045,11 +681,11 @@
             this.reset();
         });
 
-        // Botones de agregar al carrito
+        // Botones de agregar al pedido
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function() {
                 const productName = this.parentElement.querySelector('h3').textContent;
-                alert(`¡${productName} agregado al carrito!`);
+                alert(`¡${productName} agregado a tu pedido!`);
             });
         });
     </script>
