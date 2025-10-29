@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoService - Kiosco y Rotisería</title>
     <style>
-        /* Estilos básicos y funcionales */
         :root {
             --primary: #e74c3c;
             --secondary: #2c3e50;
@@ -84,6 +83,12 @@
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
@@ -102,6 +107,31 @@
             margin-bottom: 1rem;
         }
 
+        /* Categorías */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
         /* Productos */
         .products {
             padding: 60px 0;
@@ -114,16 +144,31 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
         .product-card {
             background: white;
             border-radius: 8px;
-            padding: 1.5rem;
+            overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-content {
+            padding: 1.5rem;
         }
 
         .product-card h3 {
@@ -136,6 +181,161 @@
             font-weight: bold;
             font-size: 1.2rem;
             margin-bottom: 1rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-display {
+            margin: 0 10px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #e67e22;
+        }
+
+        /* Carrito */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .cart-total {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #218838;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
         }
 
         /* Contacto */
@@ -187,6 +387,13 @@
             text-align: center;
         }
 
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
         @media (max-width: 768px) {
             .contact-container {
                 grid-template-columns: 1fr;
@@ -195,11 +402,16 @@
             .nav-links {
                 display: none;
             }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header Simple -->
+    <!-- Header -->
     <header>
         <div class="container nav-container">
             <div class="logo">Auto<span>Service</span></div>
@@ -207,6 +419,12 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#productos">Productos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
+                <li>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -220,34 +438,26 @@
         </div>
     </section>
 
-    <!-- Productos Básicos -->
+    <!-- Productos -->
     <section class="products" id="productos">
         <div class="container">
             <div class="section-title">
                 <h2>Nuestros Productos</h2>
                 <p>Los mejores productos al mejor precio</p>
             </div>
-            <div class="products-grid">
-                <div class="product-card">
-                    <h3>Pollo al Spiedo</h3>
-                    <div class="product-price">$1,200</div>
-                    <button class="btn">Agregar al Pedido</button>
-                </div>
-                <div class="product-card">
-                    <h3>Empanadas</h3>
-                    <div class="product-price">$180 c/u</div>
-                    <button class="btn">Agregar al Pedido</button>
-                </div>
-                <div class="product-card">
-                    <h3>Gaseosas 2.25L</h3>
-                    <div class="product-price">$350</div>
-                    <button class="btn">Agregar al Pedido</button>
-                </div>
-                <div class="product-card">
-                    <h3>Snacks Variados</h3>
-                    <div class="product-price">$280</div>
-                    <button class="btn">Agregar al Pedido</button>
-                </div>
+
+            <!-- Filtros por categoría -->
+            <div class="category-tabs">
+                <button class="tab active" data-category="all">Todos</button>
+                <button class="tab" data-category="Rotisería">Rotisería</button>
+                <button class="tab" data-category="Bebidas">Bebidas</button>
+                <button class="tab" data-category="Almacén">Almacén</button>
+                <button class="tab" data-category="Panadería">Panadería</button>
+            </div>
+
+            <!-- Contenedor de productos -->
+            <div class="products-grid" id="productsContainer">
+                <div class="loading">Cargando productos...</div>
             </div>
         </div>
     </section>
@@ -273,7 +483,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Nombre" required>
                         </div>
@@ -298,29 +508,429 @@
         </div>
     </footer>
 
-    <script>
-        // JavaScript básico para funcionalidades esenciales
-        console.log('AutoService cargado correctamente');
+    <!-- Carrito de Compras -->
+    <div class="overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Los items del carrito se insertarán aquí dinámicamente -->
+        </div>
+        <div class="cart-total">
+            <p>Subtotal: $<span id="subtotal">0</span></p>
+            <p>Envío: $<span id="shipping">0</span></p>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+        </div>
+        <button class="checkout-btn">Finalizar Compra por WhatsApp</button>
+    </div>
 
-        // Smooth scroll para los enlaces
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        // Estado de la aplicación
+        let cart = [];
+        let products = [];
+        let categories = new Set();
+
+        // Elementos del DOM
+        const productsContainer = document.getElementById('productsContainer');
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const overlay = document.querySelector('.overlay');
+        const closeCart = document.querySelector('.close-cart');
+        const cartItems = document.querySelector('.cart-items');
+        const cartCount = document.querySelector('.cart-count');
+        const subtotalElement = document.getElementById('subtotal');
+        const shippingElement = document.getElementById('shipping');
+        const totalElement = document.getElementById('total');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar productos desde Google Sheets
+            loadProductsFromGoogleSheets();
+
+            // Configurar event listeners
+            setupEventListeners();
+        });
+
+        // Cargar productos desde Google Sheets
+        async function loadProductsFromGoogleSheets() {
+            try {
+                // ID de tu Google Sheet (de la URL: https://docs.google.com/spreadsheets/d/1MjCExw6iwjcr0ubYgUdklIsWL_3IXn14hSE5qIXpGI4/edit#gid=0)
+                const sheetId = '1MjCExw6iwjcr0ubYgUdklIsWL_3IXn14hSE5qIXpGI4';
+
+                // Cargar datos usando la API de Google Sheets (formato JSON)
+                const response = await fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`);
+                const text = await response.text();
+
+                // Parsear la respuesta (quitar el prefijo google.visualization.Query.setResponse)
+                const json = JSON.parse(text.substring(47).slice(0, -2));
+
+                // Extraer los datos de las filas
+                const rows = json.table.rows;
+
+                // Procesar los productos
+                products = rows.map((row, index) => {
+                    // Saltar la primera fila (encabezados)
+                    if (index === 0) return null;
+
+                    const cells = row.c;
+                    return {
+                        id: index,
+                        name: cells[0] ? cells[0].v : 'Sin nombre',
+                        category: cells[1] ? cells[1].v : 'Sin categoría',
+                        price: cells[2] ? parseFloat(cells[2].v) : 0,
+                        description: cells[3] ? cells[3].v : '',
+                        image: cells[4] ? cells[4].v : 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                        stock: cells[5] ? parseInt(cells[5].v) : 0,
+                        status: cells[6] ? cells[6].v : 'active'
+                    };
+                }).filter(product => product !== null && product.status === 'active');
+
+                // Extraer categorías únicas
+                products.forEach(product => {
+                    categories.add(product.category);
+                });
+
+                // Actualizar filtros de categoría
+                updateCategoryFilters();
+
+                // Renderizar productos
+                renderProducts();
+
+            } catch (error) {
+                console.error('Error cargando productos desde Google Sheets:', error);
+                productsContainer.innerHTML = '<div class="loading">Error cargando productos. Mostrando productos de ejemplo...</div>';
+
+                // Cargar productos de ejemplo en caso de error
+                loadSampleProducts();
+            }
+        }
+
+        // Cargar productos de ejemplo (fallback)
+        function loadSampleProducts() {
+            products = [
+                {
+                    id: 1,
+                    name: 'Pollo al Spiedo',
+                    category: 'Rotisería',
+                    price: 1200,
+                    description: 'Pollo entero asado al spiedo',
+                    image: 'https://images.unsplash.com/photo-1598214886806-c87b84b7078b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                    stock: 10,
+                    status: 'active'
+                },
+                {
+                    id: 2,
+                    name: 'Empanadas',
+                    category: 'Rotisería',
+                    price: 180,
+                    description: 'Empanadas caseras de carne',
+                    image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                    stock: 20,
+                    status: 'active'
+                },
+                {
+                    id: 3,
+                    name: 'Gaseosas 2.25L',
+                    category: 'Bebidas',
+                    price: 350,
+                    description: 'Gaseosas de 2.25 litros',
+                    image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                    stock: 50,
+                    status: 'active'
+                },
+                {
+                    id: 4,
+                    name: 'Agua Mineral',
+                    category: 'Bebidas',
+                    price: 280,
+                    description: 'Agua mineral sin gas',
+                    image: 'https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                    stock: 30,
+                    status: 'active'
+                },
+                {
+                    id: 5,
+                    name: 'Snacks Variados',
+                    category: 'Almacén',
+                    price: 280,
+                    description: 'Variedad de snacks',
+                    image: 'https://images.unsplash.com/photo-1623241896326-a7e685896c3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                    stock: 25,
+                    status: 'active'
+                },
+                {
+                    id: 6,
+                    name: 'Galletitas',
+                    category: 'Almacén',
+                    price: 320,
+                    description: 'Galletitas surtidas',
+                    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                    stock: 40,
+                    status: 'active'
+                }
+            ];
+
+            // Extraer categorías únicas
+            products.forEach(product => {
+                categories.add(product.category);
+            });
+
+            // Actualizar filtros de categoría
+            updateCategoryFilters();
+
+            // Renderizar productos
+            renderProducts();
+        }
+
+        // Actualizar filtros de categoría
+        function updateCategoryFilters() {
+            const categoryTabs = document.querySelector('.category-tabs');
+
+            // Agregar botones para cada categoría única
+            categories.forEach(category => {
+                if (category && category !== 'Sin categoría') {
+                    const existingTab = document.querySelector(`[data-category="${category}"]`);
+                    if (!existingTab) {
+                        const tab = document.createElement('button');
+                        tab.className = 'tab';
+                        tab.setAttribute('data-category', category);
+                        tab.textContent = category;
+                        categoryTabs.appendChild(tab);
+                    }
                 }
             });
-        });
 
-        // Manejo básico de formulario
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-            this.reset();
-        });
+            // Agregar event listeners a los nuevos tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Activar tab seleccionado
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Filtrar productos
+                    const category = this.getAttribute('data-category');
+                    filterProducts(category);
+                });
+            });
+        }
+
+        // Filtrar productos por categoría
+        function filterProducts(category) {
+            const filteredProducts = category === 'all'
+                ? products
+                : products.filter(product => product.category === category);
+
+            renderProducts(filteredProducts);
+        }
+
+        // Renderizar productos
+        function renderProducts(productsToRender = products) {
+            productsContainer.innerHTML = '';
+
+            if (productsToRender.length === 0) {
+                productsContainer.innerHTML = '<div class="loading">No hay productos en esta categoría</div>';
+                return;
+            }
+
+            productsToRender.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('data-category', product.category);
+                productCard.innerHTML = `
+                    <div class="product-img" style="background-image: url('${product.image}')"></div>
+                    <div class="product-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-price">$${product.price}</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar al Pedido</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+
+            // Agregar event listeners a los productos
+            addProductEventListeners();
+        }
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Carrito
+            cartIcon.addEventListener('click', () => {
+                cartSidebar.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            closeCart.addEventListener('click', () => {
+                cartSidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                cartSidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Finalizar compra
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Tu carrito está vacío');
+                    return;
+                }
+
+                // Generar mensaje de WhatsApp
+                let message = `¡Hola! Quiero hacer un pedido:\n\n`;
+                message += `*Pedido:*\n`;
+
+                cart.forEach(item => {
+                    message += `🔸 ${item.quantity}x ${item.name} - $${item.price}\n`;
+                });
+
+                const subtotal = parseFloat(subtotalElement.textContent);
+                const shipping = parseFloat(shippingElement.textContent);
+                const total = parseFloat(totalElement.textContent);
+
+                message += `\n*Subtotal:* $${subtotal.toFixed(2)}\n`;
+                message += `*EnvÃo:* $${shipping.toFixed(2)}\n`;
+                message += `*Total:* $${total.toFixed(2)}\n\n`;
+                message += `¡Gracias!`;
+
+                // Abrir WhatsApp
+                const phone = '59892308828';
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
+
+                // Limpiar carrito
+                cart = [];
+                updateCart();
+                cartSidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Formulario de contacto
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+                this.reset();
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Agregar event listeners a los productos
+        function addProductEventListeners() {
+            // Controles de cantidad
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const quantityDisplay = productCard.querySelector('.quantity-display');
+                    let quantity = parseInt(quantityDisplay.textContent);
+
+                    if (this.classList.contains('plus')) {
+                        quantity++;
+                    } else if (this.classList.contains('minus') && quantity > 1) {
+                        quantity--;
+                    }
+
+                    quantityDisplay.textContent = quantity;
+                });
+            });
+
+            // Agregar al carrito
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('h3').textContent;
+                    const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace('$', ''));
+                    const quantity = parseInt(productCard.querySelector('.quantity-display').textContent);
+
+                    // Verificar si el producto ya está en el carrito
+                    const existingItem = cart.find(item => item.name === productName);
+
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        cart.push({
+                            name: productName,
+                            price: productPrice,
+                            quantity: quantity
+                        });
+                    }
+
+                    updateCart();
+                    cartSidebar.classList.add('active');
+                    overlay.classList.add('active');
+
+                    // Resetear cantidad
+                    productCard.querySelector('.quantity-display').textContent = '1';
+                });
+            });
+        }
+
+        // Actualizar carrito
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            let itemCount = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                itemCount += item.quantity;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="cart-item-price">$${item.price} x ${item.quantity}</p>
+                    </div>
+                    <button class="remove-item" data-index="${index}">&times;</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            // Calcular envío
+            const shipping = total < 1500 ? 50 : 0;
+            const finalTotal = total + shipping;
+
+            // Actualizar totales
+            subtotalElement.textContent = total.toFixed(2);
+            shippingElement.textContent = shipping.toFixed(2);
+            totalElement.textContent = finalTotal.toFixed(2);
+            cartCount.textContent = itemCount;
+
+            // Agregar event listeners a los botones de eliminar
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    cart.splice(index, 1);
+                    updateCart();
+                });
+            });
+        }
     </script>
 </body>
 </html>
