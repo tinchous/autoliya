@@ -13,6 +13,8 @@
             --light: #f8f9fa;
             --dark: #343a40;
             --success: #28a745;
+            --warning: #ffc107;
+            --info: #17a2b8;
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
         }
@@ -125,6 +127,14 @@
         .btn:hover {
             background: #c0392b;
             transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #1c2833;
         }
 
         /* Services */
@@ -589,6 +599,11 @@
             color: #0c5460;
         }
 
+        .status-preparing {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
         .status-delivered {
             background: #d4edda;
             color: #155724;
@@ -622,6 +637,90 @@
         .product-checked {
             text-decoration: line-through;
             opacity: 0.6;
+        }
+
+        /* Panel Administrativo */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .admin-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .admin-tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .admin-section {
+            display: none;
+            padding: 2rem;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .admin-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .admin-form {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* Contact */
@@ -800,6 +899,7 @@
                     </div>
                 </li>
                 <li><a href="#" id="accountBtn">Ingresar</a></li>
+                <li><a href="#" id="adminBtn" style="display: none;">Admin</a></li>
             </ul>
         </div>
     </header>
@@ -860,93 +960,8 @@
                 <button class="tab" data-category="almacen">Almacén</button>
             </div>
 
-            <div class="products-grid">
-                <!-- Productos de Rotisería -->
-                <div class="product-card" data-category="rotiseria">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1598214886806-c87b84b7078b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                    <div class="product-content">
-                        <h3>Pollo al Spiedo</h3>
-                        <div class="product-price">$1,200</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus">-</button>
-                            <span class="quantity-display">1</span>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Agregar al Pedido</button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="rotiseria">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                    <div class="product-content">
-                        <h3>Empanadas</h3>
-                        <div class="product-price">$180 c/u</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus">-</button>
-                            <span class="quantity-display">1</span>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Agregar al Pedido</button>
-                    </div>
-                </div>
-
-                <!-- Productos de Bebidas -->
-                <div class="product-card" data-category="bebidas">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                    <div class="product-content">
-                        <h3>Gaseosas 2.25L</h3>
-                        <div class="product-price">$350</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus">-</button>
-                            <span class="quantity-display">1</span>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Agregar al Pedido</button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="bebidas">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                    <div class="product-content">
-                        <h3>Agua Mineral</h3>
-                        <div class="product-price">$280</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus">-</button>
-                            <span class="quantity-display">1</span>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Agregar al Pedido</button>
-                    </div>
-                </div>
-
-                <!-- Productos de Almacén -->
-                <div class="product-card" data-category="almacen">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1623241896326-a7e685896c3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                    <div class="product-content">
-                        <h3>Snacks Variados</h3>
-                        <div class="product-price">$280</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus">-</button>
-                            <span class="quantity-display">1</span>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Agregar al Pedido</button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="almacen">
-                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')"></div>
-                    <div class="product-content">
-                        <h3>Galletitas</h3>
-                        <div class="product-price">$320</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn minus">-</button>
-                            <span class="quantity-display">1</span>
-                            <button class="quantity-btn plus">+</button>
-                        </div>
-                        <button class="add-to-cart">Agregar al Pedido</button>
-                    </div>
-                </div>
+            <div class="products-grid" id="productsContainer">
+                <!-- Los productos se cargarán dinámicamente desde Google Sheets -->
             </div>
         </div>
     </section>
@@ -987,18 +1002,24 @@
                 </div>
 
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/xjvnqekg" method="POST">
+                        <input type="hidden" name="_subject" value="Nuevo mensaje de AutoService">
+                        <input type="hidden" name="_replyto" value="info@liamyahir.delivery">
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" class="form-control" required>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="message">Mensaje</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-block">Enviar Mensaje</button>
                     </form>
@@ -1185,7 +1206,8 @@
                     <label>Dirección</label>
                     <p id="profileAddress"></p>
                 </div>
-                <button id="logoutBtn" class="btn btn-block">Cerrar Sesión</button>
+                <button id="editProfileBtn" class="btn">Editar Perfil</button>
+                <button id="logoutBtn" class="btn btn-secondary">Cerrar Sesión</button>
             </div>
 
             <div id="ordersSection" class="dashboard-section">
@@ -1225,11 +1247,142 @@
         </div>
     </div>
 
+    <!-- Panel Administrativo -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2>Panel Administrativo - AutoService</h2>
+            <button id="closeAdminPanel" class="btn btn-secondary">Cerrar Panel</button>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="products">Productos</button>
+            <button class="admin-tab" data-tab="categories">Categorías</button>
+            <button class="admin-tab" data-tab="orders">Pedidos</button>
+            <button class="admin-tab" data-tab="users">Usuarios</button>
+        </div>
+
+        <!-- Sección de Productos -->
+        <div id="productsSection" class="admin-section active">
+            <h3>Gestión de Productos</h3>
+            <button id="addProductBtn" class="btn">Agregar Producto</button>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTable">
+                    <!-- Los productos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sección de Categorías -->
+        <div id="categoriesSection" class="admin-section">
+            <h3>Gestión de Categorías</h3>
+            <button id="addCategoryBtn" class="btn">Agregar Categoría</button>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="categoriesTable">
+                    <!-- Las categorías se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sección de Pedidos -->
+        <div id="ordersSectionAdmin" class="admin-section">
+            <h3>Gestión de Pedidos</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableAdmin">
+                    <!-- Los pedidos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sección de Usuarios -->
+        <div id="usersSection" class="admin-section">
+            <h3>Gestión de Usuarios</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable">
+                    <!-- Los usuarios se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Perfil -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Editar Perfil</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editName">Nombre completo</label>
+                    <input type="text" id="editName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPhone">Teléfono</label>
+                    <input type="tel" id="editPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAddress">Dirección</label>
+                    <textarea id="editAddress" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editPassword">Nueva Contraseña (dejar en blanco para no cambiar)</label>
+                    <input type="password" id="editPassword" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-block">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Estado de la aplicación
         let cart = [];
         let currentUser = null;
         let orders = [];
+        let products = [];
+        let categories = [];
+        let users = [];
+        let isAdmin = false;
 
         // Elementos del DOM
         const cartIcon = document.querySelector('.cart-icon');
@@ -1242,19 +1395,25 @@
         const shippingElement = document.getElementById('shipping');
         const totalElement = document.getElementById('total');
         const checkoutBtn = document.querySelector('.checkout-btn');
+        const productsContainer = document.getElementById('productsContainer');
 
         // Modales
         const orderModal = document.getElementById('orderModal');
         const authModal = document.getElementById('authModal');
         const dashboardModal = document.getElementById('dashboardModal');
         const whatsappPreviewModal = document.getElementById('whatsappPreviewModal');
+        const adminPanel = document.getElementById('adminPanel');
+        const editProfileModal = document.getElementById('editProfileModal');
         const closeModal = document.querySelectorAll('.close-modal');
         const accountBtn = document.getElementById('accountBtn');
+        const adminBtn = document.getElementById('adminBtn');
 
         // Formularios
         const orderForm = document.getElementById('orderForm');
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
+        const contactForm = document.getElementById('contactForm');
+        const editProfileForm = document.getElementById('editProfileForm');
 
         // Elementos del dashboard
         const profileName = document.getElementById('profileName');
@@ -1263,6 +1422,7 @@
         const profileAddress = document.getElementById('profileAddress');
         const logoutBtn = document.getElementById('logoutBtn');
         const ordersList = document.getElementById('ordersList');
+        const editProfileBtn = document.getElementById('editProfileBtn');
 
         // Elementos de vista previa de WhatsApp
         const whatsappMessage = document.getElementById('whatsappMessage');
@@ -1273,6 +1433,17 @@
         const previewTotal = document.getElementById('previewTotal');
         const sendWhatsAppBtn = document.getElementById('sendWhatsAppBtn');
 
+        // Elementos del panel administrativo
+        const closeAdminPanel = document.getElementById('closeAdminPanel');
+        const adminTabs = document.querySelectorAll('.admin-tab');
+        const adminSections = document.querySelectorAll('.admin-section');
+        const productsTable = document.getElementById('productsTable');
+        const categoriesTable = document.getElementById('categoriesTable');
+        const ordersTableAdmin = document.getElementById('ordersTableAdmin');
+        const usersTable = document.getElementById('usersTable');
+        const addProductBtn = document.getElementById('addProductBtn');
+        const addCategoryBtn = document.getElementById('addCategoryBtn');
+
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             // Verificar si hay un usuario logueado
@@ -1280,6 +1451,12 @@
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 accountBtn.textContent = 'Mi Cuenta';
+
+                // Verificar si es admin
+                if (currentUser.email === 'admin@autoservice.com') {
+                    isAdmin = true;
+                    adminBtn.style.display = 'block';
+                }
             }
 
             // Verificar si hay órdenes guardadas
@@ -1287,7 +1464,185 @@
             if (savedOrders) {
                 orders = JSON.parse(savedOrders);
             }
+
+            // Cargar productos desde Google Sheets (simulado)
+            loadProductsFromSheet();
+
+            // Cargar categorías
+            loadCategories();
+
+            // Cargar usuarios
+            loadUsers();
         });
+
+        // Cargar productos desde Google Sheets (simulación)
+        function loadProductsFromSheet() {
+            // En una implementación real, esto haría una llamada a la API de Google Sheets
+            // Por ahora, simulamos datos basados en la hoja de cálculo
+            products = [
+                { id: 1, name: 'Pollo al Spiedo', category: 'rotiseria', price: 1200, image: 'https://images.unsplash.com/photo-1598214886806-c87b84b7078b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', stock: 10 },
+                { id: 2, name: 'Empanadas', category: 'rotiseria', price: 180, image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', stock: 20 },
+                { id: 3, name: 'Gaseosas 2.25L', category: 'bebidas', price: 350, image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', stock: 50 },
+                { id: 4, name: 'Agua Mineral', category: 'bebidas', price: 280, image: 'https://images.unsplash.com/photo-1541692641319-981cc79ee10a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', stock: 30 },
+                { id: 5, name: 'Snacks Variados', category: 'almacen', price: 280, image: 'https://images.unsplash.com/photo-1623241896326-a7e685896c3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', stock: 25 },
+                { id: 6, name: 'Galletitas', category: 'almacen', price: 320, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', stock: 40 }
+            ];
+
+            renderProducts();
+            renderAdminProducts();
+        }
+
+        // Cargar categorías
+        function loadCategories() {
+            categories = [
+                { id: 1, name: 'Rotisería', description: 'Comidas preparadas' },
+                { id: 2, name: 'Bebidas', description: 'Refrescos y aguas' },
+                { id: 3, name: 'Almacén', description: 'Productos de almacén' },
+                { id: 4, name: 'Panadería', description: 'Pan y facturas' }
+            ];
+
+            renderAdminCategories();
+        }
+
+        // Cargar usuarios
+        function loadUsers() {
+            users = [
+                { id: 1, name: 'Admin', email: 'admin@autoservice.com', phone: '+598 92 308 828', isAdmin: true },
+                { id: 2, name: 'Cliente Demo', email: 'cliente@demo.com', phone: '+598 99 123 456', isAdmin: false }
+            ];
+
+            if (currentUser && !users.find(u => u.email === currentUser.email)) {
+                users.push({ ...currentUser, id: users.length + 1, isAdmin: false });
+            }
+
+            renderAdminUsers();
+        }
+
+        // Renderizar productos en la tienda
+        function renderProducts() {
+            productsContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('data-category', product.category);
+                productCard.innerHTML = `
+                    <div class="product-img" style="background-image: url('${product.image}')"></div>
+                    <div class="product-content">
+                        <h3>${product.name}</h3>
+                        <div class="product-price">$${product.price}</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart">Agregar al Pedido</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+
+            // Agregar event listeners a los botones de productos
+            addProductEventListeners();
+        }
+
+        // Renderizar productos en el panel administrativo
+        function renderAdminProducts() {
+            productsTable.innerHTML = '';
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${getCategoryName(product.category)}</td>
+                    <td>$${product.price}</td>
+                    <td>${product.stock}</td>
+                    <td class="admin-actions">
+                        <button class="btn" onclick="editProduct(${product.id})">Editar</button>
+                        <button class="btn btn-secondary" onclick="deleteProduct(${product.id})">Eliminar</button>
+                    </td>
+                `;
+                productsTable.appendChild(row);
+            });
+        }
+
+        // Renderizar categorías en el panel administrativo
+        function renderAdminCategories() {
+            categoriesTable.innerHTML = '';
+
+            categories.forEach(category => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${category.id}</td>
+                    <td>${category.name}</td>
+                    <td>${category.description}</td>
+                    <td class="admin-actions">
+                        <button class="btn" onclick="editCategory(${category.id})">Editar</button>
+                        <button class="btn btn-secondary" onclick="deleteCategory(${category.id})">Eliminar</button>
+                    </td>
+                `;
+                categoriesTable.appendChild(row);
+            });
+        }
+
+        // Renderizar pedidos en el panel administrativo
+        function renderAdminOrders() {
+            ordersTableAdmin.innerHTML = '';
+
+            if (orders.length === 0) {
+                ordersTableAdmin.innerHTML = '<tr><td colspan="6">No hay pedidos</td></tr>';
+                return;
+            }
+
+            orders.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.number}</td>
+                    <td>${order.name}</td>
+                    <td>$${order.total.toFixed(2)}</td>
+                    <td>
+                        <select class="form-control" onchange="updateOrderStatus('${order.number}', this.value)">
+                            <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pendiente</option>
+                            <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmado</option>
+                            <option value="preparing" ${order.status === 'preparing' ? 'selected' : ''}>En Preparación</option>
+                            <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Entregado</option>
+                        </select>
+                    </td>
+                    <td>${new Date(order.date).toLocaleDateString()}</td>
+                    <td class="admin-actions">
+                        <button class="btn" onclick="viewOrderDetails('${order.number}')">Ver Detalles</button>
+                    </td>
+                `;
+                ordersTableAdmin.appendChild(row);
+            });
+        }
+
+        // Renderizar usuarios en el panel administrativo
+        function renderAdminUsers() {
+            usersTable.innerHTML = '';
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td class="admin-actions">
+                        <button class="btn" onclick="editUser(${user.id})">Editar</button>
+                        <button class="btn btn-secondary" onclick="deleteUser(${user.id})">Eliminar</button>
+                    </td>
+                `;
+                usersTable.appendChild(row);
+            });
+        }
+
+        // Obtener nombre de categoría por ID
+        function getCategoryName(categoryId) {
+            const category = categories.find(c => c.id == categoryId);
+            return category ? category.name : 'Sin categoría';
+        }
 
         // Abrir carrito
         cartIcon.addEventListener('click', () => {
@@ -1308,6 +1663,8 @@
             authModal.classList.remove('active');
             dashboardModal.classList.remove('active');
             whatsappPreviewModal.classList.remove('active');
+            adminPanel.classList.remove('active');
+            editProfileModal.classList.remove('active');
         });
 
         // Manejo del botón de cuenta
@@ -1322,6 +1679,37 @@
                 authModal.classList.add('active');
                 overlay.classList.add('active');
             }
+        });
+
+        // Manejo del botón de administración
+        adminBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isAdmin) {
+                adminPanel.classList.add('active');
+                renderAdminOrders();
+            }
+        });
+
+        // Cerrar panel administrativo
+        closeAdminPanel.addEventListener('click', () => {
+            adminPanel.classList.remove('active');
+        });
+
+        // Cambiar entre pestañas del panel administrativo
+        adminTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+
+                // Activar pestaña seleccionada
+                adminTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Mostrar sección correspondiente
+                adminSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(tabName + 'Section').classList.add('active');
+            });
         });
 
         // Cambiar entre pestañas de login/registro
@@ -1368,53 +1756,58 @@
                 authModal.classList.remove('active');
                 dashboardModal.classList.remove('active');
                 whatsappPreviewModal.classList.remove('active');
+                adminPanel.classList.remove('active');
+                editProfileModal.classList.remove('active');
                 overlay.classList.remove('active');
             });
         });
 
-        // Controles de cantidad en productos
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const productCard = this.closest('.product-card');
-                const quantityDisplay = productCard.querySelector('.quantity-display');
-                let quantity = parseInt(quantityDisplay.textContent);
+        // Agregar event listeners a los productos
+        function addProductEventListeners() {
+            // Controles de cantidad en productos
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const quantityDisplay = productCard.querySelector('.quantity-display');
+                    let quantity = parseInt(quantityDisplay.textContent);
 
-                if (this.classList.contains('plus')) {
-                    quantity++;
-                } else if (this.classList.contains('minus') && quantity > 1) {
-                    quantity--;
-                }
+                    if (this.classList.contains('plus')) {
+                        quantity++;
+                    } else if (this.classList.contains('minus') && quantity > 1) {
+                        quantity--;
+                    }
 
-                quantityDisplay.textContent = quantity;
+                    quantityDisplay.textContent = quantity;
+                });
             });
-        });
 
-        // Agregar producto al carrito
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const productCard = this.closest('.product-card');
-                const productName = productCard.querySelector('h3').textContent;
-                const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace('$', '').replace(' c/u', ''));
-                const quantity = parseInt(productCard.querySelector('.quantity-display').textContent);
+            // Agregar producto al carrito
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('h3').textContent;
+                    const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace('$', ''));
+                    const quantity = parseInt(productCard.querySelector('.quantity-display').textContent);
 
-                // Verificar si el producto ya está en el carrito
-                const existingItem = cart.find(item => item.name === productName);
+                    // Verificar si el producto ya está en el carrito
+                    const existingItem = cart.find(item => item.name === productName);
 
-                if (existingItem) {
-                    existingItem.quantity += quantity;
-                } else {
-                    cart.push({
-                        name: productName,
-                        price: productPrice,
-                        quantity: quantity
-                    });
-                }
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        cart.push({
+                            name: productName,
+                            price: productPrice,
+                            quantity: quantity
+                        });
+                    }
 
-                updateCart();
-                cartSidebar.classList.add('active');
-                overlay.classList.add('active');
+                    updateCart();
+                    cartSidebar.classList.add('active');
+                    overlay.classList.add('active');
+                });
             });
-        });
+        }
 
         // Actualizar carrito
         function updateCart() {
@@ -1553,14 +1946,28 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
 
-            // Aquí normalmente validarías las credenciales con un servidor
-            // Por ahora, simulamos un login exitoso
-            currentUser = {
-                name: 'Usuario Demo',
-                email: email,
-                phone: '+598 92 308 828',
-                address: 'Alejandro Fiol de Pereda 1251, 11800, Reducto, Montevideo'
-            };
+            // Verificar credenciales de administrador
+            if (email === 'admin@autoservice.com' && password === 'admin123') {
+                currentUser = {
+                    name: 'Administrador',
+                    email: email,
+                    phone: '+598 92 308 828',
+                    address: 'Alejandro Fiol de Pereda 1251, 11800, Reducto, Montevideo'
+                };
+                isAdmin = true;
+                adminBtn.style.display = 'block';
+            } else {
+                // Aquí normalmente validarías las credenciales con un servidor
+                // Por ahora, simulamos un login exitoso
+                currentUser = {
+                    name: 'Usuario Demo',
+                    email: email,
+                    phone: '+598 99 123 456',
+                    address: 'Dirección de ejemplo 123'
+                };
+                isAdmin = false;
+                adminBtn.style.display = 'none';
+            }
 
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
@@ -1597,6 +2004,12 @@
 
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
+            // Agregar usuario a la lista de usuarios
+            if (!users.find(u => u.email === currentUser.email)) {
+                users.push({ ...currentUser, id: users.length + 1, isAdmin: false });
+                renderAdminUsers();
+            }
+
             alert('¡Cuenta creada exitosamente! Bienvenido/a ' + currentUser.name);
 
             // Cerrar modal y actualizar interfaz
@@ -1611,11 +2024,53 @@
         // Cerrar sesión
         logoutBtn.addEventListener('click', function() {
             currentUser = null;
+            isAdmin = false;
             localStorage.removeItem('currentUser');
             accountBtn.textContent = 'Ingresar';
+            adminBtn.style.display = 'none';
             dashboardModal.classList.remove('active');
             overlay.classList.remove('active');
             alert('Has cerrado sesión correctamente');
+        });
+
+        // Editar perfil
+        editProfileBtn.addEventListener('click', function() {
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editEmail').value = currentUser.email;
+            document.getElementById('editPhone').value = currentUser.phone;
+            document.getElementById('editAddress').value = currentUser.address;
+            editProfileModal.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // Guardar cambios del perfil
+        editProfileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Actualizar datos del usuario
+            currentUser.name = document.getElementById('editName').value;
+            currentUser.email = document.getElementById('editEmail').value;
+            currentUser.phone = document.getElementById('editPhone').value;
+            currentUser.address = document.getElementById('editAddress').value;
+
+            // Actualizar en localStorage
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+            // Actualizar en la lista de usuarios
+            const userIndex = users.findIndex(u => u.email === currentUser.email);
+            if (userIndex !== -1) {
+                users[userIndex] = { ...currentUser, id: users[userIndex].id, isAdmin: users[userIndex].isAdmin };
+                renderAdminUsers();
+            }
+
+            // Actualizar vista del dashboard
+            showDashboard();
+
+            // Cerrar modal
+            editProfileModal.classList.remove('active');
+            overlay.classList.remove('active');
+
+            alert('Perfil actualizado correctamente');
         });
 
         // Mostrar dashboard del cliente
@@ -1631,20 +2086,25 @@
                 if (orders.length === 0) {
                     ordersList.innerHTML = '<p>No tienes pedidos realizados.</p>';
                 } else {
-                    orders.forEach(order => {
-                        const orderItem = document.createElement('div');
-                        orderItem.className = 'order-item';
-                        orderItem.innerHTML = `
-                            <div class="order-header">
-                                <strong>${order.number}</strong>
-                                <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
-                            </div>
-                            <p>Fecha: ${new Date(order.date).toLocaleDateString()}</p>
-                            <p>Total: $${order.total.toFixed(2)}</p>
-                            <p>${order.items.length} productos</p>
-                        `;
-                        ordersList.appendChild(orderItem);
-                    });
+                    const userOrders = orders.filter(order => order.email === currentUser.email);
+                    if (userOrders.length === 0) {
+                        ordersList.innerHTML = '<p>No tienes pedidos realizados.</p>';
+                    } else {
+                        userOrders.forEach(order => {
+                            const orderItem = document.createElement('div');
+                            orderItem.className = 'order-item';
+                            orderItem.innerHTML = `
+                                <div class="order-header">
+                                    <strong>${order.number}</strong>
+                                    <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
+                                </div>
+                                <p>Fecha: ${new Date(order.date).toLocaleDateString()}</p>
+                                <p>Total: $${order.total.toFixed(2)}</p>
+                                <p>${order.items.length} productos</p>
+                            `;
+                            ordersList.appendChild(orderItem);
+                        });
+                    }
                 }
 
                 dashboardModal.classList.add('active');
@@ -1727,34 +2187,129 @@
             const statusMap = {
                 'pending': 'Pendiente',
                 'confirmed': 'Confirmado',
+                'preparing': 'En Preparación',
                 'delivered': 'Entregado'
             };
             return statusMap[status] || status;
         }
 
+        // Funciones del panel administrativo
+        function updateOrderStatus(orderNumber, newStatus) {
+            const orderIndex = orders.findIndex(order => order.number === orderNumber);
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = newStatus;
+                localStorage.setItem('orders', JSON.stringify(orders));
+                renderAdminOrders();
+
+                // Si el usuario está viendo su dashboard, actualizarlo
+                if (currentUser && dashboardModal.classList.contains('active')) {
+                    showDashboard();
+                }
+            }
+        }
+
+        function viewOrderDetails(orderNumber) {
+            const order = orders.find(order => order.number === orderNumber);
+            if (order) {
+                let details = `Detalles del Pedido ${order.number}:\n\n`;
+                details += `Cliente: ${order.name}\n`;
+                details += `Teléfono: ${order.phone}\n`;
+                details += `Dirección: ${order.address}\n`;
+                details += `Estado: ${getStatusText(order.status)}\n\n`;
+                details += `Productos:\n`;
+                order.items.forEach(item => {
+                    details += `- ${item.quantity}x ${item.name} - $${item.price}\n`;
+                });
+                details += `\nSubtotal: $${order.subtotal.toFixed(2)}\n`;
+                details += `Envío: $${order.shipping.toFixed(2)}\n`;
+                details += `Total: $${order.total.toFixed(2)}`;
+
+                alert(details);
+            }
+        }
+
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                // En una implementación real, abriríamos un modal para editar
+                const newName = prompt('Nuevo nombre del producto:', product.name);
+                if (newName) {
+                    product.name = newName;
+                    renderProducts();
+                    renderAdminProducts();
+                }
+            }
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+                products = products.filter(p => p.id !== productId);
+                renderProducts();
+                renderAdminProducts();
+            }
+        }
+
+        function editCategory(categoryId) {
+            const category = categories.find(c => c.id === categoryId);
+            if (category) {
+                const newName = prompt('Nuevo nombre de la categoría:', category.name);
+                if (newName) {
+                    category.name = newName;
+                    renderAdminCategories();
+                }
+            }
+        }
+
+        function deleteCategory(categoryId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta categoría?')) {
+                categories = categories.filter(c => c.id !== categoryId);
+                renderAdminCategories();
+            }
+        }
+
+        function editUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                const newName = prompt('Nuevo nombre del usuario:', user.name);
+                if (newName) {
+                    user.name = newName;
+                    renderAdminUsers();
+                }
+            }
+        }
+
+        function deleteUser(userId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+                users = users.filter(u => u.id !== userId);
+                renderAdminUsers();
+            }
+        }
+
         // Filtrado de productos
         const tabs = document.querySelectorAll('.tab');
-        const products = document.querySelectorAll('.product-card');
 
         tabs.forEach(tab => {
             tab.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+
+                // Activar pestaña seleccionada
                 tabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
 
-                const category = this.getAttribute('data-category');
-
-                products.forEach(product => {
-                    if (category === 'all' || product.getAttribute('data-category') === category) {
-                        product.style.display = 'block';
+                // Mostrar productos de la categoría seleccionada
+                const productCards = document.querySelectorAll('.product-card');
+                productCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
                     } else {
-                        product.style.display = 'none';
+                        card.style.display = 'none';
                     }
                 });
             });
         });
 
         // Formulario de contacto
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
             this.reset();
