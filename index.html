@@ -67,6 +67,7 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -242,6 +243,34 @@
             margin-bottom: 1rem;
         }
 
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-display {
+            margin: 0 10px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
         .add-to-cart {
             width: 100%;
             padding: 10px;
@@ -256,6 +285,213 @@
 
         .add-to-cart:hover {
             background: #e67e22;
+        }
+
+        /* Carrito de Compras */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            z-index: 1001;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item-quantity button {
+            width: 25px;
+            height: 25px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .cart-item-quantity span {
+            margin: 0 10px;
+        }
+
+        .remove-item {
+            color: var(--primary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: #218838;
+        }
+
+        /* Overlay para el carrito */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Modal de Pedido */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1002;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-block {
+            width: 100%;
         }
 
         /* Contact */
@@ -296,34 +532,6 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--secondary);
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .btn-block {
-            width: 100%;
         }
 
         /* Footer */
@@ -421,6 +629,11 @@
                 max-width: 300px;
                 text-align: center;
             }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
@@ -437,6 +650,13 @@
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#productos">Productos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
+                <li>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </li>
+                <li><a href="#" id="loginBtn">Ingresar</a></li>
             </ul>
         </div>
     </header>
@@ -504,6 +724,11 @@
                     <div class="product-content">
                         <h3>Pollo al Spiedo</h3>
                         <div class="product-price">$1,200</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                         <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
@@ -513,6 +738,11 @@
                     <div class="product-content">
                         <h3>Empanadas</h3>
                         <div class="product-price">$180 c/u</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                         <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
@@ -523,6 +753,11 @@
                     <div class="product-content">
                         <h3>Gaseosas 2.25L</h3>
                         <div class="product-price">$350</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                         <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
@@ -532,6 +767,11 @@
                     <div class="product-content">
                         <h3>Agua Mineral</h3>
                         <div class="product-price">$280</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                         <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
@@ -542,6 +782,11 @@
                     <div class="product-content">
                         <h3>Snacks Variados</h3>
                         <div class="product-price">$280</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                         <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
@@ -551,6 +796,11 @@
                     <div class="product-content">
                         <h3>Galletitas</h3>
                         <div class="product-price">$320</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">1</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                         <button class="add-to-cart">Agregar al Pedido</button>
                     </div>
                 </div>
@@ -647,10 +897,262 @@
         </div>
     </footer>
 
+    <!-- Carrito de Compras -->
+    <div class="overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Los items del carrito se insertarán aquí dinámicamente -->
+        </div>
+        <div class="cart-total">
+            <p>Subtotal: $<span id="subtotal">0</span></p>
+            <p>Envío: $<span id="shipping">0</span></p>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+        </div>
+        <button class="checkout-btn">Finalizar Compra</button>
+    </div>
+
+    <!-- Modal de Pedido -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Finalizar Pedido</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="orderName">Nombre completo *</label>
+                    <input type="text" id="orderName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="orderPhone">Teléfono *</label>
+                    <input type="tel" id="orderPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="orderAddress">Dirección de entrega *</label>
+                    <textarea id="orderAddress" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="orderEmail">Email (opcional)</label>
+                    <input type="email" id="orderEmail" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="orderPassword">Contraseña (si desea crear una cuenta)</label>
+                    <input type="password" id="orderPassword" class="form-control">
+                </div>
+                <div class="form-group">
+                    <p><strong>Número de Orden: <span id="orderNumber"></span></strong></p>
+                    <p>Subtotal: $<span id="orderSubtotal">0</span></p>
+                    <p>Envío: $<span id="orderShipping">0</span></p>
+                    <p><strong>Total: $<span id="orderTotal">0</span></strong></p>
+                </div>
+                <button type="submit" class="btn btn-block">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Menú móvil
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
+        // Carrito de compras
+        let cart = [];
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const overlay = document.querySelector('.overlay');
+        const closeCart = document.querySelector('.close-cart');
+        const cartItems = document.querySelector('.cart-items');
+        const cartCount = document.querySelector('.cart-count');
+        const subtotalElement = document.getElementById('subtotal');
+        const shippingElement = document.getElementById('shipping');
+        const totalElement = document.getElementById('total');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+
+        // Modal de pedido
+        const orderModal = document.getElementById('orderModal');
+        const closeModal = document.querySelector('.close-modal');
+        const orderForm = document.getElementById('orderForm');
+        const orderNumberElement = document.getElementById('orderNumber');
+        const orderSubtotalElement = document.getElementById('orderSubtotal');
+        const orderShippingElement = document.getElementById('orderShipping');
+        const orderTotalElement = document.getElementById('orderTotal');
+
+        // Abrir carrito
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // Cerrar carrito
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Controles de cantidad en productos
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const quantityDisplay = productCard.querySelector('.quantity-display');
+                let quantity = parseInt(quantityDisplay.textContent);
+
+                if (this.classList.contains('plus')) {
+                    quantity++;
+                } else if (this.classList.contains('minus') && quantity > 1) {
+                    quantity--;
+                }
+
+                quantityDisplay.textContent = quantity;
+            });
+        });
+
+        // Agregar producto al carrito
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const productName = productCard.querySelector('h3').textContent;
+                const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace('$', '').replace(' c/u', ''));
+                const quantity = parseInt(productCard.querySelector('.quantity-display').textContent);
+
+                // Verificar si el producto ya está en el carrito
+                const existingItem = cart.find(item => item.name === productName);
+
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({
+                        name: productName,
+                        price: productPrice,
+                        quantity: quantity
+                    });
+                }
+
+                updateCart();
+                cartSidebar.classList.add('active');
+                overlay.classList.add('active');
+            });
+        });
+
+        // Actualizar carrito
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            let itemCount = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                itemCount += item.quantity;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="cart-item-price">$${item.price}</p>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="decrease">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="remove-item" data-index="${index}">&times;</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            // Calcular envío
+            const shipping = total < 1500 ? 50 : 0;
+            const finalTotal = total + shipping;
+
+            // Actualizar totales
+            subtotalElement.textContent = total.toFixed(2);
+            shippingElement.textContent = shipping.toFixed(2);
+            totalElement.textContent = finalTotal.toFixed(2);
+            cartCount.textContent = itemCount;
+
+            // Agregar event listeners a los botones de cantidad en el carrito
+            document.querySelectorAll('.increase').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.closest('.remove-item').getAttribute('data-index');
+                    cart[index].quantity++;
+                    updateCart();
+                });
+            });
+
+            document.querySelectorAll('.decrease').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.closest('.remove-item').getAttribute('data-index');
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity--;
+                    } else {
+                        cart.splice(index, 1);
+                    }
+                    updateCart();
+                });
+            });
+
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    cart.splice(index, 1);
+                    updateCart();
+                });
+            });
+        }
+
+        // Finalizar compra
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            // Generar número de orden aleatorio
+            const orderNumber = 'ORD' + Math.floor(100000 + Math.random() * 900000);
+            orderNumberElement.textContent = orderNumber;
+
+            // Actualizar totales en el modal
+            const subtotal = parseFloat(subtotalElement.textContent);
+            const shipping = parseFloat(shippingElement.textContent);
+            const total = parseFloat(totalElement.textContent);
+
+            orderSubtotalElement.textContent = subtotal.toFixed(2);
+            orderShippingElement.textContent = shipping.toFixed(2);
+            orderTotalElement.textContent = total.toFixed(2);
+
+            // Mostrar modal
+            orderModal.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // Cerrar modal
+        closeModal.addEventListener('click', () => {
+            orderModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Enviar formulario de pedido
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Aquí normalmente enviarías los datos a un servidor
+            alert('¡Pedido confirmado! Tu número de orden es: ' + orderNumberElement.textContent);
+
+            // Limpiar carrito y cerrar modales
+            cart = [];
+            updateCart();
+            orderModal.classList.remove('active');
+            overlay.classList.remove('active');
+            cartSidebar.classList.remove('active');
+
+            // Resetear formulario
+            this.reset();
         });
 
         // Filtrado de productos
@@ -681,12 +1183,9 @@
             this.reset();
         });
 
-        // Botones de agregar al pedido
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const productName = this.parentElement.querySelector('h3').textContent;
-                alert(`¡${productName} agregado a tu pedido!`);
-            });
+        // Menú móvil
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
         });
     </script>
 </body>
